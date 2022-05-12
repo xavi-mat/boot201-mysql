@@ -9,19 +9,23 @@ Ejercicio MySQL
 
 ## PARTE 1: Crear BD, poblar datos, modificar datos.
 
-```sql
--- 1.1 Crea una base de datos
+### 1. Crear Base de Datos
+
+#### 1.1 Crea una base de datos
 -- Crea una base de datos que se llame my_company_database.
+```sql
 CREATE DATABASE my_company_database;
 USE my_company_database;
+```
 
---  La base de datos deberá contener la siguiente tabla:
---      employees. A su vez tendrá los siguientes campos:
---          id
---          birth_date
---          first_name
---          last_name
---          gender
+#### La base de datos deberá contener la siguiente tabla:
+* **employees**. A su vez tendrá los siguientes campos:
+    * id
+    * birth_date
+    * first_name
+    * last_name
+    * gender
+```sql
 CREATE TABLE employees (
     id INT AUTO_INCREMENT,
     birth_date DATE NOT NULL,
@@ -30,26 +34,29 @@ CREATE TABLE employees (
     gender ENUM('pato', 'aguacate'),
     PRIMARY KEY (id)
 );
+```
 
--- 1.2 Añade columnas nuevas a la tabla creada
--- Añade 3 columnas nuevas a la tabla:
---      Columna "salary"
---      Columna "title"
---      Columna "title_date"
+#### 1.2 Añade columnas nuevas a la tabla creada
+Añade 3 columnas nuevas a la tabla:
+* Columna "salary"
+* Columna "title"
+* Columna "title_date"
+```sql
 ALTER TABLE employees
     ADD salary FLOAT DEFAULT 5000,
     ADD title VARCHAR(30) NOT NULL,
     ADD title_date YEAR NOT NULL;
+```
 
-
--- 2. Ejecute las siguientes consultas SQL
--- 2.1 INSERTAR DATOS
--- Inserte al menos 15 nuevos empleados:
-    -- Al menos 3 empleados deben tener el mismo nombre.
-    -- Los salarios de los empleados deben oscilar en un rango de
-    --      5000 y 50.000 y deben variar entre diferentes géneros.
-    -- Todos los empleados tienen un título.
-    -- Al menos 5 títulos son de 2020.
+### 2. Ejecute las siguientes consultas SQL
+#### 2.1 INSERTAR DATOS
+Inserte al menos 15 nuevos empleados:
+* Al menos 3 empleados deben tener el mismo nombre.
+* Los salarios de los empleados deben oscilar en un rango de
+    5000 y 50.000 y deben variar entre diferentes géneros.
+* Todos los empleados tienen un título.
+* Al menos 5 títulos son de 2020.
+```sql
 INSERT INTO employees
         (birth_date, first_name, last_name, gender, salary, title, title_date)
 VALUES  ('1977-01-01', 'Jorge', 'Smith', 'pato', ROUND(RAND()*(45000)+5000, 2), 'EGB', '2017'),
@@ -75,16 +82,18 @@ VALUES  ('1977-01-01', 'Jorge', 'Smith', 'pato', ROUND(RAND()*(45000)+5000, 2), 
         ('2005-09-21', 'Vanesa', 'Juárez', 'aguacate', ROUND(RAND()*(45000)+5000, 2), 'Grado', '2017'),
         ('2006-10-22', 'Xavier', 'López', 'pato', ROUND(RAND()*(45000)+5000, 2), 'Bootcamp The Bridge', '2020'),
         ('2007-11-23', 'Sofía', 'Sánchez', 'aguacate', ROUND(RAND()*(45000)+5000, 2), 'Bachillerato', '2020');
+```
 
 
--- 2.2 ACTUALIZAR DATOS
--- ⦁ Actualizar a los empleados:
-        -- *Si lo hacemos desde la terminal seguid el enunciado tal cual, si lo
-        -- estáis haciendo con workbench actualizadlo por (primary_key)es decir el
-        -- valor único y en este caso será el id.
--- ⦁ Cambiar el nombre de un empleado. Para ello, genere una consulta que
---      afecte solo a un determinado empleado en función de su nombre, apellido
---      y fecha de nacimiento.
+#### 2.2 ACTUALIZAR DATOS
+* Actualizar a los empleados:
+    * Si lo hacemos desde la terminal seguid el enunciado tal cual, si lo
+    estáis haciendo con workbench actualizadlo por (primary_key)es decir el
+    valor único y en este caso será el id.
+* Cambiar el nombre de un empleado. Para ello, genere una consulta que
+afecte solo a un determinado empleado en función de su nombre,apellido
+y fecha de nacimiento.
+```sql
 UPDATE employees
     SET first_name='Javier'
     WHERE birth_date='2003-07-19' AND first_name='Xavier' AND last_name='Barrendero';
