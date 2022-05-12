@@ -98,3 +98,69 @@ UPDATE employees
     SET first_name='Javier'
     WHERE birth_date='2003-07-19' AND first_name='Xavier' AND last_name='Barrendero';
 ```
+
+## PARTE 2: Consultas que no modifican los datos.
+
+### 2. Ejecute las siguientes consultas SQL
+
+#### 2.3 OBTENER DATOS
+* Seleccione todos los empleados con un salario superior a 20.000
+```sql
+SELECT * FROM employees WHERE salary > 20000 ORDER BY salary DESC;
+```
+
+* Seleccione todos los empleados con un salario inferior a 10,000
+```sql
+SELECT * FROM employees WHERE salary < 10000 ORDER BY salary DESC;
+```
+
+* Seleccione todos los empleados que tengan un salario entre 14,00 y 50.000
+```sql
+SELECT * FROM employees WHERE salary BETWEEN 14000 AND 50000 ORDER BY salary DESC;
+```
+
+* Seleccione el número total de empleados
+```sql
+SELECT COUNT(*) AS total_employees FROM employees;
+```
+
+* Selecciona los títulos del año 2019
+```sql
+SELECT CONCAT(UCASE(last_name), ', ', first_name) AS full_name, title, title_date
+    FROM employees WHERE title_date='2019';
+```
+
+* Seleccione solo el nombre de los empleados en mayúsculas
+```sql
+SELECT CONCAT(last_name, ', ', UCASE(first_name)) AS full_name
+    FROM employees ORDER BY full_name ASC;
+```
+
+* Seleccionar el nombre de los empleados sin que se repita ninguno
+    * Versión 1:
+```sql
+SELECT DISTINCT first_name
+    FROM employees ORDER BY first_name;
+```
+
+    * Versión 2:
+```sql
+SELECT first_name, COUNT(first_name) AS num
+    FROM employees GROUP BY first_name ORDER BY first_name;
+```
+
+## PARTE 3: Eliminar datos
+
+#### 2.4 BORRAR DATOS
+* Elimina el empleado con id = 5
+    * Si lo hacemos desde la terminal seguid el enunciado tal cual, si lo estáis
+        haciendo con workbench actualizadlo por (primary_key)es decir el valor único
+        y en este caso será el id.
+```sql
+DELETE FROM employees WHERE id=5;
+```
+
+* Eliminar a todos los empleados con un salario superior a 20.000
+```sql
+DELETE FROM employees WHERE salary > 20000;
+```
